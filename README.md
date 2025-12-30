@@ -22,12 +22,13 @@ pip install -r requirements.txt
 
 ## Usage
 
-1.  Modify the `target_dir` variable in `fix_ente_metadata/__main__.py` to point to your Ente export folder (default is `~/Downloads/ente_photos`).
-2.  Run the script:
+Run the script pointing to your Ente export folder:
 
 ```bash
-python -m fix_ente_metadata
+python -m ente_metadata_fixer /path/to/your/ente_photos
 ```
+
+If no path is provided, it defaults to `~/Downloads/ente_photos`.
 
 ## How it Works
 

@@ -240,6 +240,8 @@ def process_directory(directory):
 
 
 if __name__ == "__main__":
+    import argparse
+
     # Check for ffmpeg
     if shutil.which("ffmpeg") is None:
         print("Error: 'ffmpeg' is not installed or not found in PATH.")
@@ -247,13 +249,21 @@ if __name__ == "__main__":
         print("To install on macOS: brew install ffmpeg")
         sys.exit(1)
 
-    # Default path from request
-    target_dir = os.path.expanduser("~/Downloads/ente_photos")
+    parser = argparse.ArgumentParser(
+        description="Update metadata of images and videos exported from Ente."
+    )
+    parser.add_argument(
+        "target_dir",
+        nargs="?",
+        default=os.path.expanduser("~/Downloads/ente_photos"),
+        help="Directory containing Ente exports (default: ~/Downloads/ente_photos)",
+    )
+
+    args = parser.parse_args()
+    target_dir = args.target_dir
 
     if not os.path.exists(target_dir):
         print(f"Directory not found: {target_dir}")
-        print(
-            "Please edit the script to set the correct 'target_dir' or ensure the folder exists.",
-        )
+        print("Please provide a valid directory path.")
     else:
         process_directory(target_dir)
